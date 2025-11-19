@@ -1,3 +1,11 @@
+import { Outlet } from "react-router-dom";
+import Nav from "./Nav/Nav.jsx";
+
 export default function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Nav />
+      <Outlet />
+    </div>
+  );
 }
