@@ -4,11 +4,11 @@ import styles from "./Nav.module.css";
 export default function Nav() {
   return (
     <div className={styles.nav}>
-      <Link to="/homepage" className="link">
-        Homepage
+      <Link to="/home" className="link">
+        Home
       </Link>
-      <Link to="/products" className="link">
-        Products
+      <Link to="/shop" className="link">
+        Shop
       </Link>
       <Link to="/cart" className="link">
         Cart
