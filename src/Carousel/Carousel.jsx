@@ -72,9 +72,9 @@ export default function Carousel() {
   const navIndex = fetchedImages ? (currentIndex - 1 + slidesCount) % slidesCount : 0;
 
   return (
-    <div className={styles.outerContainer}>
+    <div className={styles.container}>
       <Nav slidesCount={slidesCount} navIndex={navIndex} navigate={navigate} />
-      <Button direction="left" navigate={navigate} icon="arrow_back_ios_new" />
+      <Button direction="left" icon="arrow_back_ios_new" navigate={navigate} />
       {!images.length ? (
         <p>Loading...</p>
       ) : (
@@ -85,7 +85,7 @@ export default function Carousel() {
           handleTransitionEnd={handleTransitionEnd}
         />
       )}
-      <Button direction="right" navigate={navigate} icon="arrow_forward_ios" />
+      <Button direction="right" icon="arrow_forward_ios" navigate={navigate} />
     </div>
   );
 }

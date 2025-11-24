@@ -1,14 +1,14 @@
 import styles from "./Nav.module.css";
 
-export default function Nav({ slideCount, navIndex, navigate }) {
+export default function Nav({ slidesCount, navIndex, navigate }) {
   const indicators = [];
 
-  for (let i = 0; i < slideCount; i++) {
+  for (let i = 0; i < slidesCount; i++) {
     indicators.push(
       <button
         key={i}
         type="button"
-        className={`${styles.indicator} ${navIndex === i && styles.selected}`}
+        className={`${styles.navButton} ${navIndex === i && styles.selected}`}
         onClick={() => navigate({ index: i })}
       ></button>
     );

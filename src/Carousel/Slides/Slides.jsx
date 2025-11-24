@@ -7,11 +7,7 @@ export default function Slides({ images, currentIndex, transitionEnabled, handle
   };
 
   return (
-    <div
-      className={styles.innerContainer}
-      style={animationStyle}
-      onTransitionEnd={handleTransitionEnd}
-    >
+    <div className={styles.container} style={animationStyle} onTransitionEnd={handleTransitionEnd}>
       {images.map(({ src, alt }, index) => (
         <img key={index} src={src} alt={alt} />
       ))}

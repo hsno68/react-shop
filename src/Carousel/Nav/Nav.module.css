@@ -7,7 +7,7 @@
   z-index: 1;
 }
 
-.indicator {
+.navButton {
   width: 30px;
   height: 30px;
   background-color: #f1e3c3;
@@ -18,7 +18,7 @@
   position: relative;
 }
 
-.indicator.selected::after {
+.navButton.selected::after {
   content: "";
   background-color: #c23e31;
   border: none;

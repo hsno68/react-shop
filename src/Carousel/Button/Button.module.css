@@ -1,4 +1,4 @@
-.carouselButton {
+.navButton {
   width: 70px;
   height: 70px;
   color: #763552;
@@ -13,8 +13,12 @@
   z-index: 1;
 }
 
-.carouselButton:hover {
+.navButton:hover {
   color: #fbefdd;
+}
+
+.navButton :global(.material-symbols-rounded) {
+  font-size: 2rem;
 }
 
 .left {
@@ -29,8 +33,4 @@
   padding-left: 0.5rem;
   right: 0;
   transform: translate(50%, -50%);
-}
-
-.carouselButton :global(.material-symbols-rounded) {
-  font-size: 2rem;
 }
