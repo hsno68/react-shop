@@ -67,12 +67,13 @@ export default function Carousel() {
     fetchImages();
   }, []);
 
-  const slideCount = images.length - 2;
-  const navIndex = images.length > 0 ? (currentIndex - 1 + slideCount) % slideCount : 0;
+  const fetchedImages = images.length > 0;
+  const slidesCount = fetchedImages ? images.length - 2 : 0;
+  const navIndex = fetchedImages ? (currentIndex - 1 + slidesCount) % slidesCount : 0;
 
   return (
     <div className={styles.outerContainer}>
-      <Nav slideCount={slideCount} navIndex={navIndex} navigate={navigate} />
+      <Nav slidesCount={slidesCount} navIndex={navIndex} navigate={navigate} />
       <Button direction="left" navigate={navigate} icon="arrow_back_ios_new" />
       {!images.length ? (
         <p>Loading...</p>
