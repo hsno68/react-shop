@@ -1,0 +1,4 @@
+.button {
+  composes: button from "./../../Home.module.css";
+  display: block;
+}

@@ -1,0 +1,4 @@
+.gridContainer {
+  composes: gridContainer from "./../../Home.module.css";
+  justify-items: center;
+}

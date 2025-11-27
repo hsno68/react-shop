@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import App from "./App.jsx";
-import Error from "./Error.jsx";
-import Home from "./Home.jsx";
+import Error from "./Error/Error.jsx";
+import Home from "./Home/Home.jsx";
 import Shop from "./Shop.jsx";
 import Cart from "./Cart.jsx";
 

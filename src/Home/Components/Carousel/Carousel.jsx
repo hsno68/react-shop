@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { API_KEY } from "./../apiKey.js";
-import Nav from "./Nav/Nav.jsx";
-import Button from "./Button/Button.jsx";
-import Slides from "./Slides/Slides.jsx";
+import { API_KEY } from "../../../../apiKey.js";
+import Nav from "./Components/Nav/Nav.jsx";
+import Button from "./Components/Button/Button.jsx";
+import Slides from "./Components/Slides/Slides.jsx";
 import styles from "./Carousel.module.css";
 
 export default function Carousel() {

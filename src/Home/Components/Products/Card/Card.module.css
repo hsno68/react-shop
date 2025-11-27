@@ -1,0 +1,7 @@
+.imagePlaceholder {
+  width: 100%;
+  height: 125px;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 12px;
+}
