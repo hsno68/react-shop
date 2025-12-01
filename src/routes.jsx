@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import App from "./App.jsx";
 import Error from "./Error/Error.jsx";
 import Home from "./Home/Home.jsx";
-import Shop from "./Shop.jsx";
+import Shop from "./Shop/Shop.jsx";
 import Cart from "./Cart.jsx";
 
 const routes = [

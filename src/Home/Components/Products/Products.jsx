@@ -6,7 +6,7 @@ export default function Products() {
   const cards = [];
 
   for (let i = 0; i < 4; i++) {
-    cards.push(<Card index={i + 1} />);
+    cards.push(<Card key={i} index={i + 1} />);
   }
 
   return (

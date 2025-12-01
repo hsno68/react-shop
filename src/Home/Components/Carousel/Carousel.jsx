@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import { API_KEY } from "../../../../apiKey.js";
 import Nav from "./Components/Nav/Nav.jsx";
 import Button from "./Components/Button/Button.jsx";
@@ -6,7 +7,7 @@ import Slides from "./Components/Slides/Slides.jsx";
 import styles from "./Carousel.module.css";
 
 export default function Carousel() {
-  const [images, setImages] = useState([]);
+  const [cachedImages, setCachedImages] = useOutletContext();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const isAnimatingRef = useRef(false);
@@ -25,9 +26,9 @@ export default function Carousel() {
 
   function handleTransitionEnd() {
     setCurrentIndex((prevIndex) => {
-      if (prevIndex === 0 || prevIndex === images.length - 1) {
+      if (prevIndex === 0 || prevIndex === cachedImages.length - 1) {
         setTransitionEnabled(false);
-        return prevIndex === 0 ? images.length - 2 : 1;
+        return prevIndex === 0 ? cachedImages.length - 2 : 1;
       }
       return prevIndex;
     });
@@ -36,6 +37,10 @@ export default function Carousel() {
   }
 
   useEffect(() => {
+    if (cachedImages.length > 0) {
+      return;
+    }
+
     async function fetchImages() {
       try {
         const response = await fetch("https://api.pexels.com/v1/collections/mmhrphx", {
@@ -58,7 +63,7 @@ export default function Carousel() {
         const last = sources[sources.length - 1];
         const loopedSources = [last, ...sources, first];
 
-        setImages(loopedSources);
+        setCachedImages(loopedSources);
       } catch (error) {
         console.error("Error fetching images:", error);
       }
@@ -67,19 +72,19 @@ export default function Carousel() {
     fetchImages();
   }, []);
 
-  const fetchedImages = images.length > 0;
-  const slidesCount = fetchedImages ? images.length - 2 : 0;
+  const fetchedImages = cachedImages.length > 0;
+  const slidesCount = fetchedImages ? cachedImages.length - 2 : 0;
   const navIndex = fetchedImages ? (currentIndex - 1 + slidesCount) % slidesCount : 0;
 
   return (
     <div className={styles.container}>
       <Nav slidesCount={slidesCount} navIndex={navIndex} navigate={navigate} />
       <Button direction="left" icon="arrow_back_ios_new" navigate={navigate} />
-      {!images.length ? (
+      {!cachedImages.length ? (
         <p>Loading...</p>
       ) : (
         <Slides
-          images={images}
+          images={cachedImages}
           currentIndex={currentIndex}
           transitionEnabled={transitionEnabled}
           handleTransitionEnd={handleTransitionEnd}
