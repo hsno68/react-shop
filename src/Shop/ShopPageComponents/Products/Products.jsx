@@ -28,7 +28,7 @@ export default function Products() {
 
   return (
     <div className={styles.container}>
-      <h2>Products</h2>
+      <h2 className={styles.title}>Products</h2>
       {!products.length ? (
         <p>"Loading..."</p>
       ) : (

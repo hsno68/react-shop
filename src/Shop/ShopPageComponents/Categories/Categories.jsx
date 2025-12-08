@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import Subcategories from "./Subcategories/Subcategories.jsx";
+import styles from "./Categories.module.css";
 
 export default function Categories() {
   const { categories, setCategories } = useOutletContext();
@@ -28,7 +30,7 @@ export default function Categories() {
             accumulator[generalizedCategory] = [];
           }
 
-          accumulator[generalizedCategory].push(category);
+          accumulator[generalizedCategory].push(formatCategory(category));
           return accumulator;
         }, {});
 
@@ -41,7 +43,16 @@ export default function Categories() {
     fetchCategories();
   }, []);
 
-  return <h1>Test</h1>;
+  return (
+    <ul>
+      {Object.entries(categories).map(([generalCategory, subCategories]) => (
+        <li key={generalCategory}>
+          {generalCategory}
+          <Subcategories items={subCategories} />
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 function groupCategories(category) {
@@ -85,4 +96,17 @@ function groupCategories(category) {
   }
 
   return "Other";
+}
+
+function formatCategory(category) {
+  return category
+    .split("-")
+    .map((string) => {
+      let resultString = string[0].toUpperCase() + string.slice(1);
+      if (resultString.endsWith("ens")) {
+        resultString = `${resultString.substring(0, resultString.length - 1)}'s`;
+      }
+      return resultString;
+    })
+    .join(" ");
 }
