@@ -1,11 +1,13 @@
+.container {
+  margin: 0 auto;
+  width: clamp(320px, 90vw, 1600px);
+  container-type: inline-size;
+}
+
 .container > * + * {
   margin-top: 1rem;
 }
 
 .flexContainer {
   display: flex;
-}
-
-.content {
-  gap: 2rem;
 }

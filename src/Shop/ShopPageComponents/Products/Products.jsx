@@ -8,7 +8,7 @@ export default function Products() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch("https://dummyjson.com/products?limit=10", {
+        const response = await fetch("https://dummyjson.com/products?limit=12", {
           mode: "cors",
         });
 

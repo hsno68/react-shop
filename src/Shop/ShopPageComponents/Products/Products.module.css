@@ -1,4 +1,6 @@
 .container {
+  flex: 1;
+  min-width: 0;
   text-align: center;
 }
 
@@ -8,7 +10,6 @@
 
 .gridContainer {
   width: 100%;
-  max-width: 1200px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;

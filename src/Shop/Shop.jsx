@@ -11,7 +11,7 @@ export default function Shop() {
         <Search />
         <Filters />
       </div>
-      <div className={`${styles.flexContainer} ${styles.content}`}>
+      <div className={styles.flexContainer}>
         <Categories />
         <Products />
       </div>

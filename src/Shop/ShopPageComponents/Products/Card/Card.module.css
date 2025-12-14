@@ -1,4 +1,5 @@
 .gridContainer {
+  min-width: 0;
   padding: 0.5rem;
   display: grid;
   grid-template-rows: repeat(3, auto);
@@ -9,7 +10,7 @@
 }
 
 .imageWrapper {
-  height: 200px;
+  aspect-ratio: 1 / 1;
 }
 
 .image {
