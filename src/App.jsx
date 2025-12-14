@@ -4,7 +4,7 @@ import Nav from "./Nav/Nav.jsx";
 
 export default function App() {
   const [carouselImages, setCarouselImages] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState({});
   const [cartItems, setCartItems] = useState([]);
 
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
