@@ -46,7 +46,10 @@ export default function App() {
         newListOfSubcategories = [...listOfSubcategories, subCategory];
       }
 
-      return { ...prevFilters, subCategories: { [mainCategory]: newListOfSubcategories } };
+      return {
+        ...prevFilters,
+        subCategories: { ...prevSubcategories, [mainCategory]: newListOfSubcategories },
+      };
     });
   }
 
