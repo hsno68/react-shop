@@ -47,7 +47,7 @@ export default function Products() {
           ))}
         </ul>
       ) : (
-        <h2>Search or select a category to begin.</h2>
+        <h2>Choose a category or search to view products.</h2>
       )}
     </div>
   );
