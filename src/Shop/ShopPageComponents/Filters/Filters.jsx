@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import styles from "./Filters.module.css";
 
 export default function Filters() {
-  const [value, setValue] = useState("");
-
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
+  const { sortValue, setSortValue } = useOutletContext();
 
   return (
-    <select value={value} onChange={handleChange} className={styles.select}>
+    <select
+      value={sortValue}
+      onChange={(e) => setSortValue(e.target.value)}
+      className={styles.select}
+    >
       <option value="" disabled>
-        Filter & Sort
+        Sort by
       </option>
       <option value="priceAsc">Price: Low to High</option>
       <option value="priceDesc">Price: High to Low</option>

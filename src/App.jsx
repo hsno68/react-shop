@@ -6,6 +6,7 @@ export default function App() {
   const [carouselImages, setCarouselImages] = useState([]);
 
   const [searchValue, setSearchValue] = useState("");
+  const [sortValue, setSortValue] = useState("");
   const [categories, setCategories] = useState({});
   const [products, setProducts] = useState([]);
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
@@ -69,6 +70,8 @@ export default function App() {
           setCarouselImages,
           searchValue,
           setSearchValue,
+          sortValue,
+          setSortValue,
           categories,
           setCategories,
           products,
