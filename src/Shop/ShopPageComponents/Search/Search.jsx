@@ -10,6 +10,6 @@ export default function Search() {
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
       className={styles.input}
-    ></input>
+    />
   );
 }
