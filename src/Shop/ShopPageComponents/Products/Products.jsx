@@ -6,48 +6,52 @@ import styles from "./Products.module.css";
 export default function Products() {
   const { products, setProducts, filters } = useOutletContext();
 
-  const { subCategories } = filters;
+  const cachedSubcategories = Object.keys(products);
+  const subCategories = Object.values(filters.subCategories).flat();
 
   useEffect(() => {
+    const subCategory = subCategories.find(
+      (subCategory) => !cachedSubcategories.includes(subCategory)
+    );
+
+    if (!subCategory) {
+      return;
+    }
+
     async function fetchProducts() {
       try {
-        const responses = await Promise.all(
-          Object.values(subCategories)
-            .flat()
-            .map((subCategory) =>
-              fetch(`https://dummyjson.com/products/category/${subCategory}`, { mode: "cors" })
-            )
-        );
-
-        responses.forEach((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
+        const response = await fetch(`https://dummyjson.com/products/category/${subCategory}`, {
+          mode: "cors",
         });
 
-        const data = await Promise.all(responses.map((response) => response.json()));
-        const products = data.flatMap((d) => d.products);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
 
-        setProducts(products);
+        const data = await response.json();
+
+        setProducts((prevProducts) => ({ ...prevProducts, [subCategory]: data.products }));
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     }
 
     fetchProducts();
-  }, [subCategories]);
+  }, [filters.subCategories]);
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Products</h1>
-      {products.length > 0 ? (
-        <ul className={styles.gridContainer}>
-          {products.map((product) => (
-            <Card key={product.id} product={product} />
-          ))}
-        </ul>
-      ) : (
+      {subCategories.length === 0 ? (
         <h2>Choose a category or search to view products.</h2>
+      ) : (
+        <ul className={styles.gridContainer}>
+          {subCategories
+            .flatMap((subCategory) => products[subCategory] ?? [])
+            .map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+        </ul>
       )}
     </div>
   );

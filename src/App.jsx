@@ -8,7 +8,7 @@ export default function App() {
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("");
   const [categories, setCategories] = useState({});
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
 
   const [cartItems, setCartItems] = useState([]);
