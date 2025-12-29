@@ -68,6 +68,9 @@ export default function Products() {
 
           setSearchProducts(data.products);
         } catch (error) {
+          if (error.name === "AbortError") {
+            return;
+          }
           console.error("Error fetching products:", error);
         }
       }
