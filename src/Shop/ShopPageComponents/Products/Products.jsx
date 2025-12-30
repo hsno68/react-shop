@@ -41,13 +41,13 @@ export default function Products() {
   }, [filters.subCategories]);
 
   useEffect(() => {
-    if (subCategories.length || !searchValue.trim()) {
+    const search = searchValue.trim();
+
+    if (subCategories.length || !search) {
       return;
     }
 
     const controller = new AbortController();
-
-    const search = searchValue.trim();
 
     const fetchTimeout = setTimeout(() => {
       async function fetchProducts() {
