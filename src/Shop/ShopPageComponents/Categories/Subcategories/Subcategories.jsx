@@ -6,17 +6,20 @@ export default function Subcategories({ mainCategory, items }) {
 
   return (
     <ul className={styles.container}>
-      {items.map((subCategory) => (
-        <li key={subCategory}>
-          <input
-            type="checkbox"
-            id={subCategory}
-            checked={filters.subCategories[mainCategory]?.includes(subCategory) || false}
-            onChange={() => toggleSubcategoryFilter({ mainCategory, subCategory })}
-          />
-          <label htmlFor={subCategory}>{formatCategory(subCategory)}</label>
-        </li>
-      ))}
+      {items
+        .slice()
+        .sort((a, b) => a.localeCompare(b))
+        .map((subCategory) => (
+          <li key={subCategory}>
+            <input
+              type="checkbox"
+              id={subCategory}
+              checked={filters.subCategories[mainCategory]?.includes(subCategory) || false}
+              onChange={() => toggleSubcategoryFilter({ mainCategory, subCategory })}
+            />
+            <label htmlFor={subCategory}>{formatCategory(subCategory)}</label>
+          </li>
+        ))}
     </ul>
   );
 }

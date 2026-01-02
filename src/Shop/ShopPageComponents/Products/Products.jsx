@@ -7,10 +7,11 @@ export default function Products() {
   const { products, setProducts, filters, searchValue, sortValue } = useOutletContext();
   const [searchProducts, setSearchProducts] = useState([]);
 
-  const cachedSubcategories = Object.keys(products);
   const subCategories = Object.values(filters.subCategories).flat();
 
   useEffect(() => {
+    const cachedSubcategories = Object.keys(products);
+
     const subCategory = subCategories.find(
       (subCategory) => !cachedSubcategories.includes(subCategory)
     );

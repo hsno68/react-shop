@@ -8,7 +8,7 @@ export default function Categories() {
     useOutletContext();
 
   useEffect(() => {
-    if (Object.keys(categories).length > 0) {
+    if (Object.keys(categories).length) {
       return;
     }
 
@@ -49,16 +49,18 @@ export default function Categories() {
       <li>
         <h2 onClick={clearFilters}>Clear Filters</h2>
       </li>
-      {Object.entries(categories).map(([mainCategory, subCategories]) => (
-        <li key={mainCategory}>
-          <h2 onClick={() => toggleMainCategoryFilter({ mainCategory })}>{mainCategory}</h2>
-          {filters.mainCategories.includes(mainCategory) ? (
-            <Subcategories mainCategory={mainCategory} items={subCategories} />
-          ) : (
-            false
-          )}
-        </li>
-      ))}
+      {Object.entries(categories)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([mainCategory, subCategories]) => (
+          <li key={mainCategory}>
+            <h2 onClick={() => toggleMainCategoryFilter({ mainCategory })}>{mainCategory}</h2>
+            {filters.mainCategories.includes(mainCategory) ? (
+              <Subcategories mainCategory={mainCategory} items={subCategories} />
+            ) : (
+              false
+            )}
+          </li>
+        ))}
     </ul>
   );
 }

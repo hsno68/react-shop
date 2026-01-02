@@ -42,7 +42,7 @@ export default function Carousel() {
   }
 
   useEffect(() => {
-    if (carouselImages.length > 0) {
+    if (carouselImages.length) {
       return;
     }
 

@@ -59,7 +59,7 @@ export default function App() {
   }
 
   function clearFilters() {
-    setFilters((prevFilters) => ({ ...prevFilters, subCategories: [] }));
+    setFilters((prevFilters) => ({ ...prevFilters, subCategories: {} }));
   }
 
   return (
@@ -82,6 +82,7 @@ export default function App() {
           cartItems,
           setCartItems,
           filters,
+          setFilters,
           toggleMainCategoryFilter,
           toggleSubcategoryFilter,
           clearFilters,
