@@ -12,11 +12,11 @@ export default function Products() {
   useEffect(() => {
     const cachedSubcategories = Object.keys(products);
 
-    const subCategory = subCategories.find(
+    const newSubcategories = subCategories.filter(
       (subCategory) => !cachedSubcategories.includes(subCategory)
     );
 
-    if (!subCategory) {
+    if (!newSubcategories.length) {
       return;
     }
 
@@ -31,8 +31,6 @@ export default function Products() {
         }
 
         const data = await response.json();
-
-        console.log(data.products[1]);
 
         setProducts((prevProducts) => ({ ...prevProducts, [subCategory]: data.products }));
       } catch (error) {
@@ -88,10 +86,9 @@ export default function Products() {
   }, [searchValue, filters.subCategories]);
 
   function getListOfProducts() {
-    const productsList =
-      subCategories.length > 0
-        ? subCategories.flatMap((subCategory) => products[subCategory] ?? [])
-        : searchProducts;
+    const productsList = subCategories.length
+      ? subCategories.flatMap((subCategory) => products[subCategory] ?? [])
+      : searchProducts;
 
     const normalizeSearch = searchValue.trim().toLowerCase();
 

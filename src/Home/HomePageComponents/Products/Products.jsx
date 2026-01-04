@@ -44,11 +44,15 @@ export default function Products() {
   return (
     <div className={styles.container}>
       <h2>Featured Products</h2>
-      <ul className={styles.gridContainer}>
-        {featuredProducts.map(({ title, thumbnail, price }) => (
-          <Card key={title} title={title} thumbnail={thumbnail} price={price} context={"home"} />
-        ))}
-      </ul>
+      {featuredProducts.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        <ul className={styles.gridContainer}>
+          {featuredProducts.map(({ title, thumbnail, price }) => (
+            <Card key={title} title={title} thumbnail={thumbnail} price={price} context={"home"} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
