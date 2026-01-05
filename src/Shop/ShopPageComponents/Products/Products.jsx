@@ -98,11 +98,15 @@ export default function Products() {
   }, [searchValue, filters.subCategories]);
 
   function getListOfProducts() {
-    const productsList = subCategories.length
+    let productsList = subCategories.length
       ? subCategories.flatMap((subCategory) => products[subCategory] ?? [])
       : searchProducts;
 
     const normalizeSearch = searchValue.trim().toLowerCase();
+
+    if (sortValue) {
+      productsList = sortProducts(productsList);
+    }
 
     if (normalizeSearch) {
       return productsList.filter((product) => {
@@ -113,6 +117,24 @@ export default function Products() {
     }
 
     return productsList;
+  }
+
+  function sortProducts(products) {
+    const comparators = {
+      ratingDesc: (a, b) => b.rating - a.rating,
+      priceAsc: (a, b) => a.price - b.price,
+      priceDesc: (a, b) => b.price - a.price,
+      titleAsc: (a, b) => a.title.localeCompare(b.title),
+      titleDesc: (a, b) => b.title.localeCompare(a.title),
+    };
+
+    const comparator = comparators[sortValue];
+
+    if (!comparator) {
+      return products;
+    }
+
+    return products.sort(comparator);
   }
 
   return (

@@ -10,9 +10,7 @@ export default function Sort() {
       onChange={(e) => setSortValue(e.target.value)}
       className={styles.select}
     >
-      <option value="" disabled>
-        Sort by
-      </option>
+      <option value="">Sort by</option>
       <option value="ratingDesc">Rating: High to Low</option>
       <option value="priceAsc">Price: Low to High</option>
       <option value="priceDesc">Price: High to Low</option>
