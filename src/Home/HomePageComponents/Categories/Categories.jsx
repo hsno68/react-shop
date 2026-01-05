@@ -5,32 +5,6 @@ export default function Categories() {
   const { setFilters } = useOutletContext();
   const navigate = useNavigate();
 
-  const categories = [
-    {
-      mainCategory: "Electronics",
-      subCategories: ["laptops", "mobile-accessories", "smartphones", "tablets"],
-    },
-    {
-      mainCategory: "Apparel",
-      subCategories: [
-        "mens-shirts",
-        "mens-shoes",
-        "tops",
-        "womens-bags",
-        "womens-dresses",
-        "womens-shoes",
-      ],
-    },
-    {
-      mainCategory: "Home",
-      subCategories: ["furniture", "home-decoration", "kitchen-accessories"],
-    },
-    {
-      mainCategory: "Beauty",
-      subCategories: ["beauty", "fragrances", "skin-care"],
-    },
-  ];
-
   function navigateToShop({ mainCategory, subCategories }) {
     setFilters({
       mainCategories: [mainCategory],
@@ -58,3 +32,29 @@ export default function Categories() {
     </div>
   );
 }
+
+const categories = [
+  {
+    mainCategory: "Electronics",
+    subCategories: ["laptops", "mobile-accessories", "smartphones", "tablets"],
+  },
+  {
+    mainCategory: "Apparel",
+    subCategories: [
+      "mens-shirts",
+      "mens-shoes",
+      "tops",
+      "womens-bags",
+      "womens-dresses",
+      "womens-shoes",
+    ],
+  },
+  {
+    mainCategory: "Home",
+    subCategories: ["furniture", "home-decoration", "kitchen-accessories"],
+  },
+  {
+    mainCategory: "Beauty",
+    subCategories: ["beauty", "fragrances", "skin-care"],
+  },
+];
