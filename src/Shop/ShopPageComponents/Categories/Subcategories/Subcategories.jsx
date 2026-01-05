@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "./Subcategories.module.css";
+import { formatCategory } from "../../../../utilities.js";
 
 export default function Subcategories({ mainCategory, items }) {
   const { filters, toggleSubcategoryFilter } = useOutletContext();
@@ -22,17 +23,4 @@ export default function Subcategories({ mainCategory, items }) {
         ))}
     </ul>
   );
-}
-
-function formatCategory(category) {
-  return category
-    .split("-")
-    .map((string) => {
-      let resultString = string[0].toUpperCase() + string.slice(1);
-      if (resultString.endsWith("ens")) {
-        resultString = `${resultString.substring(0, resultString.length - 1)}'s`;
-      }
-      return resultString;
-    })
-    .join(" ");
 }
