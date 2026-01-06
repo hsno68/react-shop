@@ -1,0 +1,14 @@
+.gridContainer {
+  padding: 1.5rem;
+  max-width: 280px;
+  min-height: 240px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.75rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+}
+
+.gridContainer :global(.material-symbols-rounded) {
+  font-size: 3rem;
+}

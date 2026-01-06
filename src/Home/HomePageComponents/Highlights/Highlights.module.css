@@ -4,12 +4,12 @@
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-items: center;
   gap: 1rem;
 }
 
-@container (max-width: 900px) {
+@container (max-width: 1000px) {
   .gridContainer {
     grid-template-columns: repeat(2, 1fr);
   }
