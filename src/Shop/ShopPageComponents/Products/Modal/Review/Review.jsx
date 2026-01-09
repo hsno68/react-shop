@@ -11,15 +11,15 @@ export default function Review({ review }) {
           account_circle
         </span>
         <p>{reviewerName}</p>
-        <p>{formatDate(date)}</p>
         <p className={styles.rating}>
-          {`${rating}/5.0`}
           <span aria-hidden="true" className="material-symbols-rounded">
             star_rate
           </span>
+          {`${rating.toFixed(1)} / 5.0`}
         </p>
       </div>
-      <p>{comment}</p>
+      <p className={styles.date}>{formatDate(date)}</p>
+      <p className={styles.comment}>{comment}</p>
     </li>
   );
 }
