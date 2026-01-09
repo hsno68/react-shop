@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import Review from "./Review/Review.jsx";
 import styles from "./Modal.module.css";
 
@@ -7,6 +8,10 @@ export default function Modal({ product, closeModal }) {
 
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
+
+  const { setCartItems } = useOutletContext();
+
+  function addToCart() {}
 
   useEffect(() => {
     function onKeyDown(e) {
@@ -75,7 +80,9 @@ export default function Modal({ product, closeModal }) {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
-          <button type="button">Add to Cart</button>
+          <button type="button" onClick={addToCart}>
+            Add to Cart
+          </button>
         </div>
         <h3>Reviews</h3>
         <ul>

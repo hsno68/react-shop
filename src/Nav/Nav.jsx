@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css";
 
-export default function Nav() {
+export default function Nav({ cart }) {
   return (
     <div className={styles.nav}>
       <Link to="/home" className="link">
@@ -11,7 +11,7 @@ export default function Nav() {
         Shop
       </Link>
       <Link to="/cart" className="link">
-        Cart
+        Cart {`(${cart.length})`}
       </Link>
     </div>
   );

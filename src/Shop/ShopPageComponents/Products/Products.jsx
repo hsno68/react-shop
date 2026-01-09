@@ -41,7 +41,13 @@ export default function Products() {
           const newListOfProducts = data.reduce((accumulator, current) => {
             const category = current.subCategory;
             const products = current.products;
-            accumulator[category] = products;
+
+            const productsMap = products.reduce((map, current) => {
+              map[current.id] = current;
+              return map;
+            }, {});
+
+            accumulator[category] = productsMap;
             return accumulator;
           }, {});
 
@@ -101,7 +107,7 @@ export default function Products() {
 
   function getListOfProducts() {
     let productsList = subCategories.length
-      ? subCategories.flatMap((subCategory) => products[subCategory] ?? [])
+      ? subCategories.flatMap((subCategory) => Object.values(products[subCategory] || {}))
       : searchProducts;
 
     const normalizeSearch = searchValue.trim().toLowerCase();
@@ -171,9 +177,21 @@ export default function Products() {
 /* Example products structure
 
   products = {
-    laptops: [...],
-    smartphones: [...]
-  }
+    laptops: {
+      1: { id: 1, title: "Laptop A", price: 999, ... },
+      2: { id: 2, title: "Laptop B", price: 1299, ... },
+      3: { id: 3, title: "Laptop C", price: 899, ... },
+    },
+    smartphones: {
+      7: { id: 7, title: "Phone X", price: 699, ... },
+      8: { id: 8, title: "Phone Y", price: 799, ... },
+      9: { id: 9, title: "Phone Z", price: 599, ... },
+    },
+    tablets: {
+      12: { id: 12, title: "Tablet Alpha", price: 499, ... },
+      13: { id: 13, title: "Tablet Beta", price: 599, ... },
+    }
+  };
 
 */
 

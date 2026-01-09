@@ -63,7 +63,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Nav />
+      <Nav cart={cartItems} />
       <Outlet
         context={{
           carouselImages,
