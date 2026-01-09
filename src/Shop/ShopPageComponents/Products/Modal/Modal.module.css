@@ -1,7 +1,8 @@
 .overlay {
+  text-align: start;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,5 +13,59 @@
 }
 
 .modal {
+  width: clamp(420px, 80vw, 1200px);
+  padding: 2rem;
+  color: var(--color-contrast);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 12px;
+  position: relative;
   z-index: 2;
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.sku {
+  font-size: 0.75rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating :global(.material-symbols-rounded) {
+  font-size: 1.5rem;
+}
+
+.imageSection {
+  display: flex;
+}
+
+.gallery {
+  flex-shrink: 0;
+}
+
+.galleryImage {
+  width: 100px;
+  height: 100px;
+  border: 2px solid transparent;
+}
+
+.galleryImage.selected {
+  border: 2px solid var(--color-contrast);
+}
+
+.mainImage {
+  width: 300px;
+  height: 300px;
+}
+
+.priceTag {
+  font-size: 2rem;
+  font-weight: bold;
 }

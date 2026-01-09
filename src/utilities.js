@@ -10,3 +10,15 @@ export function formatCategory(category) {
     })
     .join(" ");
 }
+
+export function formatDate(date) {
+  if (!date) return "N/A";
+
+  const parsedDate = new Date(date);
+  return parsedDate.toLocaleDateString("en-US", {
+    weekday: "short", // Mon
+    month: "short", // May
+    day: "2-digit", // 23
+    year: "numeric", // 2024
+  });
+}
