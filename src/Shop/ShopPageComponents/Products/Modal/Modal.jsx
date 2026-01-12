@@ -4,14 +4,41 @@ import Review from "./Review/Review.jsx";
 import styles from "./Modal.module.css";
 
 export default function Modal({ product, closeModal }) {
-  const { title, description, price, images, rating, reviews, availabilityStatus, sku } = product;
+  const {
+    id,
+    title,
+    description,
+    price,
+    images,
+    rating,
+    reviews,
+    availabilityStatus,
+    category,
+    sku,
+  } = product;
 
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
 
   const { setCartItems } = useOutletContext();
 
-  function addToCart() {}
+  function addToCart() {
+    setCartItems((prevCartItems) => {
+      if (!Object.hasOwn(prevCartItems, id)) {
+        return {
+          ...prevCartItems,
+          [id]: { category, quantity },
+        };
+      }
+
+      return {
+        ...prevCartItems,
+        [id]: { ...prevCartItems[id], quantity: prevCartItems[id].quantity + quantity },
+      };
+    });
+
+    closeModal();
+  }
 
   useEffect(() => {
     function onKeyDown(e) {
@@ -69,16 +96,16 @@ export default function Modal({ product, closeModal }) {
             <img src={currentImage} alt={title} />
           </div>
         </div>
+        <p>{availabilityStatus}</p>
         <p className={styles.priceTag}>{`$${price}`}</p>
         <h3>About this item</h3>
         <p>{description}</p>
-        <p>{availabilityStatus}</p>
         <div>
           <input
             type="number"
             min={1}
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={(e) => setQuantity(Number(e.target.value))}
           />
           <button type="button" onClick={addToCart}>
             Add to Cart

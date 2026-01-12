@@ -11,22 +11,23 @@ export default function App() {
   const [products, setProducts] = useState({});
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState({});
 
   function toggleMainCategoryFilter({ mainCategory }) {
     setFilters((prevFilters) => {
       const prevMainCategories = prevFilters.mainCategories;
-      let newListofMainCategories = [];
 
       if (!prevMainCategories.includes(mainCategory)) {
-        newListofMainCategories = [...prevMainCategories, mainCategory];
-      } else {
-        newListofMainCategories = prevMainCategories.filter(
-          (category) => category !== mainCategory
-        );
+        return {
+          ...prevFilters,
+          mainCategories: [...prevMainCategories, mainCategory],
+        };
       }
 
-      return { ...prevFilters, mainCategories: newListofMainCategories };
+      return {
+        ...prevFilters,
+        mainCategories: prevMainCategories.filter((category) => category !== mainCategory),
+      };
     });
   }
 
@@ -34,7 +35,7 @@ export default function App() {
     setFilters((prevFilters) => {
       const prevSubcategories = prevFilters.subCategories;
 
-      if (!prevSubcategories.hasOwnProperty(mainCategory)) {
+      if (!Object.hasOwn(prevSubcategories, mainCategory)) {
         return {
           ...prevFilters,
           subCategories: { ...prevSubcategories, [mainCategory]: [subCategory] },
@@ -42,17 +43,23 @@ export default function App() {
       }
 
       const listOfSubcategories = prevSubcategories[mainCategory];
-      let newListOfSubcategories = [];
 
-      if (listOfSubcategories.includes(subCategory)) {
-        newListOfSubcategories = listOfSubcategories.filter((category) => category !== subCategory);
-      } else {
-        newListOfSubcategories = [...listOfSubcategories, subCategory];
+      if (!listOfSubcategories.includes(subCategory)) {
+        return {
+          ...prevFilters,
+          subCategories: {
+            ...prevSubcategories,
+            [mainCategory]: [...listOfSubcategories, subCategory],
+          },
+        };
       }
 
       return {
         ...prevFilters,
-        subCategories: { ...prevSubcategories, [mainCategory]: newListOfSubcategories },
+        subCategories: {
+          ...prevSubcategories,
+          [mainCategory]: listOfSubcategories.filter((category) => category !== subCategory),
+        },
       };
     });
   }
