@@ -128,3 +128,14 @@ export default function Modal({ product, closeModal }) {
     </div>
   );
 }
+
+/* Example cart structure
+
+cartItems = {
+  1: {category: "laptops", quantity: 1 },
+  8: {category: "sunglasses", quantity: 2 },
+}
+
+[id]: { category, quantity }
+
+*/
