@@ -53,7 +53,14 @@ export default function Modal({ product, closeModal }) {
   }, []);
 
   return (
-    <div className={styles.overlay} onClick={closeModal}>
+    <div
+      className={styles.overlay}
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) {
+          closeModal();
+        }
+      }}
+    >
       <div
         role="dialog"
         aria-modal="true"
