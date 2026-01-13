@@ -59,15 +59,8 @@ export default function Products() {
         });
 
         setProducts((prevProducts) => {
-          const newProducts = data.reduce((accumulator, { products }) => {
-            products.forEach((product) => {
-              const { id } = product;
-              accumulator[id] = product;
-            });
-            return accumulator;
-          }, {});
-
-          return { ...prevProducts, ...newProducts };
+          const allProducts = data.flatMap(({ products }) => products);
+          return mergeProducts(prevProducts, allProducts);
         });
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -108,19 +101,9 @@ export default function Products() {
           }
 
           const data = await response.json();
-          const searchResultByIds = data.products.map(({ id }) => id);
 
-          setSearchResults(searchResultByIds);
-
-          setProducts((prevProducts) => {
-            const newProducts = data.products.reduce((accumulator, product) => {
-              const { id } = product;
-              accumulator[id] = product;
-              return accumulator;
-            }, {});
-
-            return { ...prevProducts, ...newProducts };
-          });
+          setSearchResults(data.products.map(({ id }) => id));
+          setProducts((prevProducts) => mergeProducts(prevProducts, data.products));
         } catch (error) {
           if (error.name === "AbortError") {
             return;
@@ -137,6 +120,16 @@ export default function Products() {
       controller.abort();
     };
   }, [searchValue, filters.subCategories]);
+
+  function mergeProducts(prevProducts, productsArray) {
+    const newProducts = productsArray.reduce((accumulator, product) => {
+      const { id } = product;
+      accumulator[id] = product;
+      return accumulator;
+    }, {});
+
+    return { ...prevProducts, ...newProducts };
+  }
 
   function getListOfProducts() {
     let productIds = subCategories.length
