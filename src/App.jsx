@@ -8,6 +8,7 @@ export default function App() {
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("");
   const [categories, setCategories] = useState({});
+  const [categoriesCache, setCategoriesCache] = useState({});
   const [products, setProducts] = useState({});
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
 
@@ -81,6 +82,8 @@ export default function App() {
           setSortValue,
           categories,
           setCategories,
+          categoriesCache,
+          setCategoriesCache,
           products,
           setProducts,
           cart,

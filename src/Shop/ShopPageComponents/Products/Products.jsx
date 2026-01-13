@@ -5,14 +5,24 @@ import Modal from "./Modal/Modal.jsx";
 import styles from "./Products.module.css";
 
 export default function Products() {
-  const { products, setProducts, filters, searchValue, sortValue } = useOutletContext();
+  const {
+    categoriesCache,
+    setCategoriesCache,
+    products,
+    setProducts,
+    filters,
+    searchValue,
+    sortValue,
+  } = useOutletContext();
+
+  const [searchResults, setSearchResults] = useState([]);
   const [activeProduct, setActiveProduct] = useState(null);
-  const [searchProducts, setSearchProducts] = useState([]);
 
   const subCategories = Object.values(filters.subCategories).flat();
 
+  //Categories fetch
   useEffect(() => {
-    const cachedSubcategories = Object.keys(products);
+    const cachedSubcategories = Object.keys(categoriesCache);
 
     const newSubcategories = subCategories.filter(
       (subCategory) => !cachedSubcategories.includes(subCategory)
@@ -29,29 +39,35 @@ export default function Products() {
             const response = await fetch(`https://dummyjson.com/products/category/${subCategory}`, {
               mode: "cors",
             });
+
             if (!response.ok) {
               throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
+
             const json = await response.json();
             return { subCategory, products: json.products };
           })
         );
 
-        setProducts((prevProducts) => {
-          const newListOfProducts = data.reduce((accumulator, current) => {
-            const category = current.subCategory;
-            const products = current.products;
-
-            const productsMap = products.reduce((map, current) => {
-              map[current.id] = current;
-              return map;
-            }, {});
-
-            accumulator[category] = productsMap;
+        setCategoriesCache((prevCategoriesCache) => {
+          const newCategories = data.reduce((accumulator, { subCategory, products }) => {
+            accumulator[subCategory] = products.map((product) => product.id);
             return accumulator;
           }, {});
 
-          return { ...prevProducts, ...newListOfProducts };
+          return { ...prevCategoriesCache, ...newCategories };
+        });
+
+        setProducts((prevProducts) => {
+          const newProducts = data.reduce((accumulator, { products }) => {
+            products.forEach((product) => {
+              const { id } = product;
+              accumulator[id] = product;
+            });
+            return accumulator;
+          }, {});
+
+          return { ...prevProducts, ...newProducts };
         });
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -61,11 +77,16 @@ export default function Products() {
     fetchProducts();
   }, [filters.subCategories]);
 
+  //Search fetch
   useEffect(() => {
     const search = searchValue.trim();
 
-    if (subCategories.length || !search) {
-      setSearchProducts([]);
+    if (!search) {
+      setSearchResults([]);
+      return;
+    }
+
+    if (subCategories.length) {
       return;
     }
 
@@ -87,8 +108,19 @@ export default function Products() {
           }
 
           const data = await response.json();
+          const searchResultByIds = data.products.map(({ id }) => id);
 
-          setSearchProducts(data.products);
+          setSearchResults(searchResultByIds);
+
+          setProducts((prevProducts) => {
+            const newProducts = data.products.reduce((accumulator, product) => {
+              const { id } = product;
+              accumulator[id] = product;
+              return accumulator;
+            }, {});
+
+            return { ...prevProducts, ...newProducts };
+          });
         } catch (error) {
           if (error.name === "AbortError") {
             return;
@@ -107,39 +139,44 @@ export default function Products() {
   }, [searchValue, filters.subCategories]);
 
   function getListOfProducts() {
-    let productsList = subCategories.length
-      ? subCategories.flatMap((subCategory) => Object.values(products[subCategory] || {}))
-      : searchProducts;
+    let productIds = subCategories.length
+      ? subCategories.flatMap((subCategory) => categoriesCache[subCategory] ?? [])
+      : searchResults;
 
     const search = searchValue.trim().toLowerCase();
 
     if (search && subCategories.length) {
-      productsList = productsList.filter((product) => {
-        const fields = [
-          product.title,
-          product.description,
-          product.brand,
-          ...(product.tags ?? []),
-        ].map((field) => field.toLowerCase());
+      productIds = productIds.filter((id) => {
+        const product = products[id];
 
-        return fields.some((field) => field.includes(search));
+        const props = ["title", "description", "brand", "tags"];
+
+        return props.some((prop) => {
+          const value = product[prop];
+
+          if (Array.isArray(value)) {
+            return value.some((v) => v.toLowerCase().includes(search));
+          }
+
+          return String(value).toLowerCase().includes(search);
+        });
       });
     }
 
     if (sortValue) {
-      productsList = sortProducts(productsList);
+      productIds = sortProducts(productIds);
     }
 
-    return productsList;
+    return productIds;
   }
 
   function sortProducts(products) {
     const comparators = {
-      ratingDesc: (a, b) => b.rating - a.rating,
-      priceAsc: (a, b) => a.price - b.price,
-      priceDesc: (a, b) => b.price - a.price,
-      titleAsc: (a, b) => a.title.localeCompare(b.title),
-      titleDesc: (a, b) => b.title.localeCompare(a.title),
+      ratingDesc: (a, b) => products[b].rating - products[a].rating,
+      priceAsc: (a, b) => products[a].price - products[b].price,
+      priceDesc: (a, b) => products[b].price - products[a].price,
+      titleAsc: (a, b) => products[a].title.localeCompare(products[b].title),
+      titleDesc: (a, b) => products[b].title.localeCompare(products[a].title),
     };
 
     const comparator = comparators[sortValue];
@@ -148,16 +185,18 @@ export default function Products() {
       return products;
     }
 
-    return products.sort(comparator);
+    return [...products].sort(comparator);
   }
 
   return (
     <div className={styles.container}>
-      {subCategories.length === 0 && searchProducts.length === 0 ? (
+      {subCategories.length === 0 && searchResults.length === 0 ? (
         <h2>Choose a category or search to view products.</h2>
       ) : (
         <ul className={styles.gridContainer}>
-          {getListOfProducts().map((product) => {
+          {getListOfProducts().map((productId) => {
+            const product = products[productId];
+
             const { id, title, thumbnail, price } = product;
 
             return (
@@ -180,23 +219,22 @@ export default function Products() {
   );
 }
 
-/* Example products structure
+/* Example categories cache structure
+
+  categoriesCache = {
+    laptops: [1, 2, 3, 4...],
+    sunglasses: [12, 13, 14, 15, ...],
+    beauty: [60, 61, 62, ...],
+  }
+
+*/
+
+/* Example products cache structure
 
   products = {
-    laptops: {
-      1: { id: 1, title: "Laptop A", price: 999, ... },
-      2: { id: 2, title: "Laptop B", price: 1299, ... },
-      3: { id: 3, title: "Laptop C", price: 899, ... },
-    },
-    smartphones: {
-      7: { id: 7, title: "Phone X", price: 699, ... },
-      8: { id: 8, title: "Phone Y", price: 799, ... },
-      9: { id: 9, title: "Phone Z", price: 599, ... },
-    },
-    tablets: {
-      12: { id: 12, title: "Tablet Alpha", price: 499, ... },
-      13: { id: 13, title: "Tablet Beta", price: 599, ... },
-    }
+    1: { id: 1, title: ...},
+    2: { id: 2, title: ...},
+    3: { id: 3, title: ...},
   };
 
 */
