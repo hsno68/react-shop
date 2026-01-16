@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
-import { API_KEY } from "../../../../apiKey.js";
 import Nav from "./CarouselComponents/Nav/Nav.jsx";
 import Button from "./CarouselComponents/Button/Button.jsx";
 import Slides from "./CarouselComponents/Slides/Slides.jsx";
 import styles from "./Carousel.module.css";
+
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export default function Carousel() {
   const { carouselImages, setCarouselImages } = useOutletContext();
