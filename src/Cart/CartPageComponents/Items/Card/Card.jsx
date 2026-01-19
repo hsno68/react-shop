@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 
-export default function Card({ title, thumbnail, price, quantity }) {
+export default function Card({ id, title, thumbnail, price, quantity, onCartChange }) {
   return (
     <li className={styles.gridContainer}>
       <div className={styles.imageWrapper}>
@@ -15,6 +15,7 @@ export default function Card({ title, thumbnail, price, quantity }) {
             type="button"
             aria-label="Increase quantity"
             className={styles.button}
+            onClick={() => onCartChange({ id, mode: "subtract" })}
             disabled={quantity === 1}
           >
             <span aria-hidden="true" className="material-symbols-rounded">
@@ -22,13 +23,20 @@ export default function Card({ title, thumbnail, price, quantity }) {
             </span>
           </button>
           <p className={styles.quantity}>{`${quantity}`}</p>
-          <button type="button" aria-label="Decrease quantity" className={styles.button}>
+          <button
+            type="button"
+            aria-label="Decrease quantity"
+            className={styles.button}
+            onClick={() => onCartChange({ id, mode: "add" })}
+          >
             <span aria-hidden="true" className="material-symbols-rounded">
               add
             </span>
           </button>
         </div>
-        <button type="button">Delete</button>
+        <button type="button" onClick={() => onCartChange({ id, mode: "delete" })}>
+          Delete
+        </button>
       </div>
       <p className={styles.total}>{`Total: $${(price * quantity).toFixed(2)}`}</p>
     </li>

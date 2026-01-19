@@ -4,9 +4,23 @@ import Card from "./Card/Card.jsx";
 import styles from "./Items.module.css";
 
 export default function Items() {
-  const { products, cart } = useOutletContext();
+  const { products, cart, setCart } = useOutletContext();
 
   const isCartEmpty = Object.keys(cart).length === 0;
+
+  function onCartChange({ id, mode }) {
+    setCart((prevCart) => {
+      if (mode === "delete") {
+        const { [id]: deleted, ...restOfCart } = prevCart;
+        return restOfCart;
+      }
+
+      return {
+        ...prevCart,
+        [id]: prevCart[id] + (mode === "add" ? 1 : -1),
+      };
+    });
+  }
 
   return (
     <div className={`${styles.container} ${isCartEmpty ? styles.fullWidth : ""}`}>
@@ -28,10 +42,12 @@ export default function Items() {
               return (
                 <Card
                   key={id}
+                  id={id}
                   title={title}
                   thumbnail={thumbnail}
                   price={price}
                   quantity={quantity}
+                  onCartChange={onCartChange}
                 />
               );
             })}
