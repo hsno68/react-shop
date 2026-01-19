@@ -1,8 +1,10 @@
 .gridContainer {
   min-height: 200px;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px repeat(3, 1fr);
   grid-template-rows: 1fr auto;
+  justify-items: center;
+  align-items: center;
   border: 1px solid var(--color-primary);
   border-radius: 12px;
 }
@@ -19,12 +21,30 @@
   object-fit: contain;
 }
 
-.content {
-  align-self: center;
+.title {
+  text-align: center;
 }
 
 .total {
   justify-self: end;
+  grid-column: 4;
   grid-row: 2;
   font-weight: bold;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+}
+
+.quantityControls {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.quantityButtons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.button :global(.material-symbols-rounded) {
+  font-size: 1rem;
 }
