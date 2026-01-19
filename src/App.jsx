@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Nav from "./Nav/Nav.jsx";
 
@@ -9,10 +9,13 @@ export default function App() {
   const [sortValue, setSortValue] = useState("");
   const [categories, setCategories] = useState({});
   const [categoriesCache, setCategoriesCache] = useState({});
-  const [products, setProducts] = useState({});
   const [filters, setFilters] = useState({ mainCategories: [], subCategories: {} });
 
-  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState(() =>
+    JSON.parse(localStorage.getItem("products") || "{}")
+  );
+
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart") || "{}"));
 
   function toggleMainCategoryFilter({ mainCategory }) {
     setFilters((prevFilters) => {
@@ -69,6 +72,11 @@ export default function App() {
     setFilters((prevFilters) => ({ ...prevFilters, subCategories: {} }));
   }
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("products", JSON.stringify(products));
+  }, [products, cart]);
+
   return (
     <div className="app">
       <Nav cart={cart} />
@@ -107,5 +115,37 @@ export default function App() {
       Electronics: ["laptops", "smartphones"],
       Apparel: ["mens-shirts", "womens-dresses"]
     }
+
+*/
+
+/* Example categories cache structure
+
+  categoriesCache = {
+    laptops: [1, 2, 3, 4...],
+    sunglasses: [12, 13, 14, 15, ...],
+    beauty: [60, 61, 62, ...],
+  }
+
+*/
+
+/* Example products cache structure
+
+  products = {
+    1: { id: 1, title: ...},
+    2: { id: 2, title: ...},
+    3: { id: 3, title: ...},
+  };
+
+*/
+
+/* Example cart structure
+
+cart = {
+  1: 1,
+  8: 2,
+  9: 1
+}
+
+[id]: quantity
 
 */

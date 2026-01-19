@@ -212,26 +212,6 @@ export default function Products() {
   );
 }
 
-/* Example categories cache structure
-
-  categoriesCache = {
-    laptops: [1, 2, 3, 4...],
-    sunglasses: [12, 13, 14, 15, ...],
-    beauty: [60, 61, 62, ...],
-  }
-
-*/
-
-/* Example products cache structure
-
-  products = {
-    1: { id: 1, title: ...},
-    2: { id: 2, title: ...},
-    3: { id: 3, title: ...},
-  };
-
-*/
-
 /* Example fetched data return
 [
   {
