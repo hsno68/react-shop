@@ -7,7 +7,7 @@ export default function Card({ id, title, thumbnail, price, quantity, onCartChan
         <img src={thumbnail} alt={title} className={styles.image} />
       </div>
       <h3 className={styles.title}>{title}</h3>
-      <p className={styles.price}>{`$${price}`}</p>
+      <p>{`$${price}`}</p>
       <div className={styles.quantityControls}>
         <p>Qty:</p>
         <div className={styles.quantityButtons}>
