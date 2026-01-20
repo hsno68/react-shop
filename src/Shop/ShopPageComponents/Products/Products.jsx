@@ -163,7 +163,7 @@ export default function Products() {
     return productIds;
   }
 
-  function sortProducts(products) {
+  function sortProducts(productIds) {
     const comparators = {
       ratingDesc: (a, b) => products[b].rating - products[a].rating,
       priceAsc: (a, b) => products[a].price - products[b].price,
@@ -175,10 +175,10 @@ export default function Products() {
     const comparator = comparators[sortValue];
 
     if (!comparator) {
-      return products;
+      return productIds;
     }
 
-    return [...products].sort(comparator);
+    return [...productIds].sort(comparator);
   }
 
   return (
