@@ -16,7 +16,7 @@
   width: clamp(420px, 80vw, 1200px);
   padding: 2rem;
   color: var(--color-contrast);
-  background-color: var(--color-primary);
+  background-color: var(--color-bg-primary);
   border: 1px solid var(--color-primary);
   border-radius: 12px;
   position: relative;
