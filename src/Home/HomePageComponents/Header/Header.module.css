@@ -1,13 +1,38 @@
 .container {
+  padding: 4rem 1rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.container h1 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .button {
   display: inline-block;
-  padding: 1rem;
-  color: var(--color-contrast);
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: 8px;
+  font-size: 1.125rem;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
