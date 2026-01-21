@@ -1,5 +1,5 @@
 .container {
-  padding: clamp(2rem, 6cqw, 4rem) clamp(0.5rem, 2cqw, 1rem);
+  padding: clamp(1rem, 3cqw, 2rem) clamp(0.5rem, 2cqw, 1rem);
   text-align: center;
   display: flex;
   flex-direction: column;
