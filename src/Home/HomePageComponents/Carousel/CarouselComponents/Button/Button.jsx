@@ -5,7 +5,7 @@ export default function Button({ direction, icon, navigate }) {
     <button
       type="button"
       aria-label={direction === "left" ? "Previous slide" : "Next slide"}
-      className={`${styles.navButton} ${styles[direction]}`}
+      className={styles.navButton}
       onClick={() => navigate({ direction })}
     >
       <span aria-hidden="true" className="material-symbols-rounded">

@@ -1,12 +1,13 @@
-.container {
-  margin: 0 auto;
-  width: clamp(300px, 80%, 1000px);
-  height: 300px;
-  border: 10px solid #d39f77;
-  border-radius: 8px;
+.gridContainer {
+  padding: clamp(2rem, 4cqw, 4rem) clamp(0.5rem, 2cqw, 1rem);
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.flexContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow: hidden;
+  gap: 1rem;
 }
