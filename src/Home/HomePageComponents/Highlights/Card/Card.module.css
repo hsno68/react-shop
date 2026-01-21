@@ -1,14 +1,16 @@
 .gridContainer {
-  padding: 1.5rem;
+  padding: clamp(1rem, 2cqw, 1.5rem);
   max-width: 280px;
   min-height: 240px;
   display: grid;
   grid-template-rows: auto auto 1fr;
-  gap: 0.75rem;
-  border: 1px solid var(--color-primary);
+  gap: clamp(0.5rem, 1cqw, 0.75rem);
+  border: none;
   border-radius: 12px;
+  background-color: var(--color-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .gridContainer :global(.material-symbols-rounded) {
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5cqw, 3rem);
 }
