@@ -79,18 +79,20 @@ export default function Carousel() {
     <div className={styles.gridContainer}>
       <div className={styles.flexContainer}>
         <Button direction="left" icon="arrow_back_ios_new" navigate={navigate} />
-        {carouselImages.length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          <Slides
-            images={createLoopedCarousel(carouselImages)}
-            animationStyle={createAnimationStyle({
-              index: currentIndex,
-              canTransition: transitionEnabled,
-            })}
-            handleTransitionEnd={handleTransitionEnd}
-          />
-        )}
+        <div className={styles.imagesContainer}>
+          {carouselImages.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            <Slides
+              images={createLoopedCarousel(carouselImages)}
+              animationStyle={createAnimationStyle({
+                index: currentIndex,
+                canTransition: transitionEnabled,
+              })}
+              handleTransitionEnd={handleTransitionEnd}
+            />
+          )}
+        </div>
         <Button direction="right" icon="arrow_forward_ios" navigate={navigate} />
       </div>
       <Nav

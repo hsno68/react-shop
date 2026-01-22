@@ -1,24 +1,12 @@
-.container {
-  margin: 0 auto;
-  width: 100%;
-  height: clamp(200px, 40cqw, 500px);
-  max-width: 1000px;
-  border-radius: 0.5rem;
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.08),
-    0 8px 16px rgba(0, 0, 0, 0.08),
-    0 12px 24px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-}
-
 .slides {
   display: flex;
   height: 100%;
 }
 
 .image {
+  flex-shrink: 0;
   width: 100%;
   height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  flex-shrink: 0;
 }

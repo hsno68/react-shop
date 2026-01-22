@@ -11,3 +11,18 @@
   align-items: center;
   gap: 1rem;
 }
+
+.imagesContainer {
+  flex: 0 0 auto;
+  width: clamp(320px, 80%, 1000px);
+  height: clamp(200px, 40cqw, 500px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
