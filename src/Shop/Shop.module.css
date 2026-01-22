@@ -1,6 +1,9 @@
 .container {
   margin: 0 auto;
   width: clamp(520px, 90vw, 1600px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   container-type: inline-size;
 }
 
