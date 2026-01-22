@@ -1,3 +1,17 @@
 .container {
+  margin-top: 0.375rem;
   padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.container li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.container label,
+.container input {
+  cursor: pointer;
 }
