@@ -6,11 +6,11 @@ export default function Review({ review }) {
 
   return (
     <li className={styles.gridContainer}>
-      <div className={styles.container}>
+      <div className={styles.info}>
         <span aria-hidden="true" className="material-symbols-rounded">
           account_circle
         </span>
-        <p>{reviewerName}</p>
+        <p className={styles.reviewer}>{reviewerName}</p>
         <p className={styles.rating}>
           <span aria-hidden="true" className="material-symbols-rounded">
             star_rate

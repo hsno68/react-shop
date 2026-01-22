@@ -44,6 +44,7 @@ export default function Modal({ product, closeModal }) {
 
   return (
     <div
+      role="presentation"
       className={styles.overlay}
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) {
@@ -61,22 +62,24 @@ export default function Modal({ product, closeModal }) {
         <button
           type="button"
           aria-label="Close product modal"
-          className={styles.button}
+          className={styles.close}
           onClick={closeModal}
         >
           <span aria-hidden="true" className="material-symbols-rounded">
             close
           </span>
         </button>
-        <h2 id="product-modal-title">{title}</h2>
-        <p className={styles.sku}>{`SKU: ${sku}`}</p>
-        <p className={styles.rating}>
-          {`${rating}/5.0`}
-          <span aria-hidden="true" className="material-symbols-rounded">
-            star_rate
-          </span>
-          {`(${reviews.length} reviews)`}
-        </p>
+        <div>
+          <h2 id="product-modal-title">{title}</h2>
+          <p className={styles.sku}>{`SKU: ${sku}`}</p>
+          <p className={styles.rating}>
+            {`${rating}/5.0`}
+            <span aria-hidden="true" className="material-symbols-rounded">
+              star_rate
+            </span>
+            {`(${reviews.length} reviews)`}
+          </p>
+        </div>
         <div className={styles.imageSection}>
           <ul className={styles.gallery}>
             {images.map((image, index) => (
@@ -93,28 +96,33 @@ export default function Modal({ product, closeModal }) {
             <img src={currentImage} alt={title} />
           </div>
         </div>
-        <p>{availabilityStatus}</p>
-        <p className={styles.priceTag}>{`$${price}`}</p>
-        <h3>About this item</h3>
-        <p>{description}</p>
         <div>
-          <input
-            type="number"
-            min={1}
-            value={quantity}
-            className={styles.input}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-          />
-          <button type="button" onClick={addToCart}>
-            Add to Cart
-          </button>
+          <p>{availabilityStatus}</p>
+          <p className={styles.priceTag}>{`$${price}`}</p>
+          <h3>About this item</h3>
+          <p>{description}</p>
+          <div className={styles.controls}>
+            <input
+              type="number"
+              min={1}
+              max={99}
+              value={quantity}
+              className={styles.input}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+            />
+            <button type="button" className={styles.add} onClick={addToCart}>
+              Add to Cart
+            </button>
+          </div>
         </div>
-        <h3>Reviews</h3>
-        <ul>
-          {reviews.map((review, index) => (
-            <Review key={index} review={review} />
-          ))}
-        </ul>
+        <div>
+          <h3>Reviews</h3>
+          <ul className={styles.reviewsContainer}>
+            {reviews.map((review, index) => (
+              <Review key={index} review={review} />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

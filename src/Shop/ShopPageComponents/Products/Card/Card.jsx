@@ -6,7 +6,7 @@ export default function Card({ title, thumbnail, price, onClick }) {
       <div className={styles.imageWrapper}>
         <img src={thumbnail} alt={title} className={styles.image} />
       </div>
-      <p>{title}</p>
+      <h3>{title}</h3>
       <p>{`$${price}`}</p>
     </li>
   );
