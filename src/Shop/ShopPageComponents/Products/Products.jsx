@@ -184,7 +184,9 @@ export default function Products() {
   return (
     <div className={styles.container}>
       {subCategories.length === 0 && searchResults.length === 0 ? (
-        <h2>Choose a category or search to view products.</h2>
+        <div className={styles.placeholder}>
+          <h2>Choose a category or search to view products.</h2>
+        </div>
       ) : (
         <ul className={styles.gridContainer}>
           {getListOfProducts().map((productId) => {

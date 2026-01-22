@@ -1,8 +1,9 @@
-.container {
-  text-align: center;
+.placeholder {
+  height: clamp(200px, 30vh, 400px);
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .container h2 {
