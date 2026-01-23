@@ -23,20 +23,33 @@ export default function Subtotal() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.summary}>
-        <h2>Summary</h2>
-        <p>{`Subtotal: $${subtotal.toFixed(2)}`}</p>
-        <p>{`Tax: $${tax.toFixed(2)}`}</p>
-        <p>{`Shipping: ${shippingText}`}</p>
-        {!freeShipping && (
-          <small
-            className={styles.shipping}
-          >{`Free shipping on orders over $${FREE_SHIPPING_THRESHOLD}`}</small>
-        )}
-        <hr />
-        <p className={styles.total}>{`Total: $${total.toFixed(2)}`}</p>
-        <button type="button">Proceed to checkout</button>
+      <h2>Summary</h2>
+      <div className={styles.lineItem}>
+        <p>Subtotal</p>
+        <span aria-hidden="true" className={styles.dots}></span>
+        <p>{`$${subtotal.toFixed(2)}`}</p>
       </div>
+      <div className={styles.lineItem}>
+        <p>Tax</p>
+        <span aria-hidden="true" className={styles.dots}></span>
+        <p>{`$${tax.toFixed(2)}`}</p>
+      </div>
+      <div className={styles.lineItem}>
+        <p>Shipping</p>
+        <span aria-hidden="true" className={styles.dots}></span>
+        <p>{shippingText}</p>
+      </div>
+      <div className={styles.shippingWrapper}>
+        <small className={styles.shipping}>
+          {freeShipping
+            ? "This purchase qualifies for free shipping."
+            : `Free shipping on orders over $${FREE_SHIPPING_THRESHOLD}`}
+        </small>
+      </div>
+      <p className={styles.total}>{`Total: $${total.toFixed(2)}`}</p>
+      <button type="button" className={styles.checkout}>
+        Proceed to checkout
+      </button>
     </div>
   );
 }

@@ -34,7 +34,7 @@ export default function Items() {
         </p>
       ) : (
         <>
-          <ul>
+          <ul className={styles.itemsList}>
             {Object.entries(cart).map(([id, quantity]) => {
               const product = products[id];
               const { title, thumbnail, price } = product;

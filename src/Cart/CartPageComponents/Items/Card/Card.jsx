@@ -6,7 +6,7 @@ export default function Card({ id, title, thumbnail, price, quantity, onCartChan
       <div className={styles.imageWrapper}>
         <img src={thumbnail} alt={title} className={styles.image} />
       </div>
-      <h3 className={styles.title}>{title}</h3>
+      <h3>{title}</h3>
       <p>{`$${price}`}</p>
       <div className={styles.quantityControls}>
         <p>Qty:</p>
@@ -34,7 +34,11 @@ export default function Card({ id, title, thumbnail, price, quantity, onCartChan
             </span>
           </button>
         </div>
-        <button type="button" onClick={() => onCartChange({ id, mode: "delete" })}>
+        <button
+          type="button"
+          className={styles.delete}
+          onClick={() => onCartChange({ id, mode: "delete" })}
+        >
           Delete
         </button>
       </div>
