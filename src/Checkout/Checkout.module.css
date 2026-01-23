@@ -1,0 +1,24 @@
+.gridContainer {
+  margin: 0 auto;
+  width: clamp(520px, 90vw, 1600px);
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+  container-type: inline-size;
+}
+
+.gridContainer .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.gridContainer h1 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.gridContainer a {
+  font-size: 0.8rem;
+  font-style: italic;
+}

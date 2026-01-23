@@ -1,12 +1,12 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { getSubtotal } from "../../../utilities.js";
-import styles from "./Subtotal.module.css";
+import styles from "./Summary.module.css";
 
 const SHIPPING_COST = 5.99;
 const TAX_RATE = 0.08;
 const FREE_SHIPPING_THRESHOLD = 35;
 
-export default function Subtotal() {
+export default function Summary({ mode }) {
   const { products, cart } = useOutletContext();
 
   const subtotal = getSubtotal(cart, products);
@@ -47,9 +47,11 @@ export default function Subtotal() {
         </small>
       </div>
       <p className={styles.total}>{`Total: $${total.toFixed(2)}`}</p>
-      <button type="button" className={styles.checkout}>
-        Proceed to checkout
-      </button>
+      {mode === "cart" && (
+        <Link to="/checkout" className={styles.checkout}>
+          Proceed to checkout
+        </Link>
+      )}
     </div>
   );
 }
