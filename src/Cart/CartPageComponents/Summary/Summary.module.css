@@ -65,3 +65,9 @@
   transform: translateY(1px);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
+
+@media (max-width: 1000px) {
+  .container {
+    grid-row: -1;
+  }
+}

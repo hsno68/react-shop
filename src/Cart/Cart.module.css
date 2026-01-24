@@ -11,3 +11,13 @@
 .gridContainer h1 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
+
+@media (max-width: 1000px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .gridContainer h1 {
+    text-align: center;
+  }
+}
