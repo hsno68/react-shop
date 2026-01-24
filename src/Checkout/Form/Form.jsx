@@ -3,9 +3,9 @@ import styles from "./Form.module.css";
 
 export default function Form() {
   return (
-    <div className={styles.form}>
+    <div className={styles.container}>
       <p id="form-instructions">An asterisk (*) indicates a required field.</p>
-      <form aria-labelledby="form-instructions">
+      <form aria-labelledby="form-instructions" className={styles.form}>
         {sections.map(({ heading, controls }) => (
           <Section key={heading} heading={heading} controls={controls} />
         ))}

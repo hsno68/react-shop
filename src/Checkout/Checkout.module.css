@@ -1,6 +1,6 @@
 .gridContainer {
   margin: 0 auto;
-  width: clamp(520px, 90vw, 1600px);
+  width: min(92vw, 900px);
   display: grid;
   grid-template-columns: 1fr 320px;
   grid-template-rows: auto 1fr;
@@ -21,4 +21,14 @@
 .gridContainer a {
   font-size: 0.8rem;
   font-style: italic;
+}
+
+@media (max-width: 1000px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .heading {
+    text-align: center;
+  }
 }

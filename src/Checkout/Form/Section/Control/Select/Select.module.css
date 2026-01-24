@@ -1,0 +1,17 @@
+.select {
+  padding: clamp(0.45rem, 1.2vw, 0.7rem) clamp(0.6rem, 1.5vw, 0.875rem);
+  font-size: clamp(0.95rem, 1vw, 1rem);
+  line-height: 1.2;
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}

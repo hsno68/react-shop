@@ -1,4 +1,5 @@
 import { useOutletContext } from "react-router-dom";
+import styles from "./Select.module.css";
 
 export default function Select({ id, required }) {
   const { formData, setFormData } = useOutletContext();
@@ -10,6 +11,7 @@ export default function Select({ id, required }) {
       id={id}
       value={formData[id]}
       required={required}
+      className={styles.select}
       onChange={(e) => {
         const { id, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));

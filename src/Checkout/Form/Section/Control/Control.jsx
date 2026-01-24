@@ -1,5 +1,6 @@
 import Input from "./Input/Input.jsx";
 import Select from "./Select/Select.jsx";
+import styles from "./Control.module.css";
 
 const inputs = ["text", "tel", "email", "date"];
 
@@ -21,7 +22,7 @@ export default function Control({ type, label, id, required }) {
   const control = types[type](props);
 
   return (
-    <div className="form-control-container">
+    <div className={styles.container}>
       <label htmlFor={id}>
         <span aria-hidden="true">{required && "*"}</span>
         {label}
