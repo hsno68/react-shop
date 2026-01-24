@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { initialFormData } from "./Checkout/Form/Form.jsx";
 import Nav from "./Nav/Nav.jsx";
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
   );
 
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("cart") || "{}"));
+  const [formData, setFormData] = useState(initialFormData);
 
   function toggleMainCategoryFilter({ mainCategory }) {
     setFilters((prevFilters) => {
@@ -92,15 +94,17 @@ export default function App() {
           setCategories,
           categoriesCache,
           setCategoriesCache,
-          products,
-          setProducts,
-          cart,
-          setCart,
           filters,
           setFilters,
           toggleMainCategoryFilter,
           toggleSubcategoryFilter,
           clearFilters,
+          products,
+          setProducts,
+          cart,
+          setCart,
+          formData,
+          setFormData,
         }}
       />
     </div>
