@@ -13,7 +13,7 @@ export default function Checkout() {
         </Link>
       </div>
       <Form />
-      <Summary />
+      <Summary page={"checkout"} />
     </div>
   );
 }

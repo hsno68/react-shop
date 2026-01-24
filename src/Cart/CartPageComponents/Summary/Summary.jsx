@@ -6,7 +6,7 @@ const SHIPPING_COST = 5.99;
 const TAX_RATE = 0.08;
 const FREE_SHIPPING_THRESHOLD = 35;
 
-export default function Summary({ mode }) {
+export default function Summary({ page }) {
   const { products, cart } = useOutletContext();
 
   const subtotal = getSubtotal(cart, products);
@@ -47,10 +47,12 @@ export default function Summary({ mode }) {
         </small>
       </div>
       <p className={styles.total}>{`Total: $${total.toFixed(2)}`}</p>
-      {mode === "cart" && (
-        <Link to="/checkout" className={styles.checkout}>
-          Proceed to checkout
+      {page === "cart" ? (
+        <Link to="/checkout" className={styles.button}>
+          Proceed to Checkout
         </Link>
+      ) : (
+        <button className={`${styles.button} ${styles.pay}`}>Complete Purchase</button>
       )}
     </div>
   );
