@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Form from "./Form/Form.jsx";
+import Items from "../Cart/CartPageComponents/Items/Items.jsx";
 import Summary from "../Cart/CartPageComponents/Summary/Summary.jsx";
 import styles from "./Checkout.module.css";
 
@@ -13,6 +14,7 @@ export default function Checkout() {
         </Link>
       </div>
       <Form />
+      <Items page={"checkout"} />
       <Summary page={"checkout"} />
     </div>
   );

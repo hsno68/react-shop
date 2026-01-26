@@ -22,7 +22,9 @@ export default function Summary({ page }) {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${page === "cart" ? styles.cartPage : styles.checkoutPage}`}
+    >
       <h2>Summary</h2>
       <div className={styles.lineItem}>
         <p>Subtotal</p>

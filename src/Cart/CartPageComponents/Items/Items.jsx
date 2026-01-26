@@ -3,7 +3,7 @@ import { getSubtotal } from "../../../utilities.js";
 import Card from "./Card/Card.jsx";
 import styles from "./Items.module.css";
 
-export default function Items() {
+export default function Items({ page }) {
   const { products, cart, setCart } = useOutletContext();
 
   const isCartEmpty = Object.keys(cart).length === 0;
@@ -23,7 +23,9 @@ export default function Items() {
   }
 
   return (
-    <div className={`${styles.container} ${isCartEmpty ? styles.fullWidth : ""}`}>
+    <div
+      className={`${styles.container} ${page === "cart" ? styles.cartPage : styles.checkoutPage} ${isCartEmpty ? styles.fullWidth : ""}`}
+    >
       {isCartEmpty ? (
         <p>
           Your cart is empty.{" "}
@@ -42,6 +44,7 @@ export default function Items() {
               return (
                 <Card
                   key={id}
+                  page={page}
                   id={id}
                   title={title}
                   thumbnail={thumbnail}

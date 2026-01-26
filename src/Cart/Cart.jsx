@@ -6,7 +6,7 @@ export default function Cart() {
   return (
     <div className={styles.gridContainer}>
       <h1>Shopping Cart</h1>
-      <Items />
+      <Items page={"cart"} />
       <Summary page={"cart"} />
     </div>
   );

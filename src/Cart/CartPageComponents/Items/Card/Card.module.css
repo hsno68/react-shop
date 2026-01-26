@@ -25,6 +25,7 @@
 
 .quantityControls {
   display: grid;
+  justify-items: center;
   gap: 0.75rem;
 }
 

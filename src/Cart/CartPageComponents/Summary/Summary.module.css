@@ -10,6 +10,9 @@
   border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  right: 0;
 }
 
 .lineItem {
@@ -71,7 +74,11 @@
 }
 
 @media (max-width: 1000px) {
-  .container {
-    grid-row: -1;
+  .container.cartPage {
+    grid-row: 3;
+  }
+
+  .container.checkoutPage {
+    grid-row: 4;
   }
 }

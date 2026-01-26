@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 
-export default function Card({ id, title, thumbnail, price, quantity, onCartChange }) {
+export default function Card({ page, id, title, thumbnail, price, quantity, onCartChange }) {
   return (
     <li className={styles.gridContainer}>
       <div className={styles.imageWrapper}>
@@ -11,36 +11,42 @@ export default function Card({ id, title, thumbnail, price, quantity, onCartChan
       <div className={styles.quantityControls}>
         <p>Qty:</p>
         <div className={styles.quantityButtons}>
-          <button
-            type="button"
-            aria-label="Increase quantity"
-            className={styles.button}
-            onClick={() => onCartChange({ id, mode: "subtract" })}
-            disabled={quantity === 1}
-          >
-            <span aria-hidden="true" className="material-symbols-rounded">
-              remove
-            </span>
-          </button>
+          {page === "cart" && (
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              className={styles.button}
+              onClick={() => onCartChange({ id, mode: "subtract" })}
+              disabled={quantity === 1}
+            >
+              <span aria-hidden="true" className="material-symbols-rounded">
+                remove
+              </span>
+            </button>
+          )}
           <p className={styles.quantity}>{`${quantity}`}</p>
+          {page === "cart" && (
+            <button
+              type="button"
+              aria-label="Decrease quantity"
+              className={styles.button}
+              onClick={() => onCartChange({ id, mode: "add" })}
+            >
+              <span aria-hidden="true" className="material-symbols-rounded">
+                add
+              </span>
+            </button>
+          )}
+        </div>
+        {page === "cart" && (
           <button
             type="button"
-            aria-label="Decrease quantity"
-            className={styles.button}
-            onClick={() => onCartChange({ id, mode: "add" })}
+            className={styles.delete}
+            onClick={() => onCartChange({ id, mode: "delete" })}
           >
-            <span aria-hidden="true" className="material-symbols-rounded">
-              add
-            </span>
+            Delete
           </button>
-        </div>
-        <button
-          type="button"
-          className={styles.delete}
-          onClick={() => onCartChange({ id, mode: "delete" })}
-        >
-          Delete
-        </button>
+        )}
       </div>
       <p className={styles.total}>{`Total: $${(price * quantity).toFixed(2)}`}</p>
     </li>
