@@ -21,12 +21,14 @@ const contact = [
   { type: "tel", label: "Phone", id: "phone", required: false },
 ];
 
-const address = [
+const shipping = [
   { type: "text", label: "City", id: "city", required: true },
   { type: "select", label: "State", id: "state", required: false },
   { type: "tel", label: "ZIP", id: "zip", required: false },
   { type: "select", label: "Country", id: "country", required: true },
 ];
+
+const billing = [{ type: "checkbox", label: "Same as shipping", id: "checkbox", required: false }];
 
 const payment = [
   { type: "text", label: "Cardholder Name", id: "cardholder", required: true },
@@ -37,12 +39,45 @@ const payment = [
 
 const sections = [
   { heading: "contact", controls: contact },
-  { heading: "shipping", controls: address },
-  { heading: "billing", controls: address },
+  { heading: "shipping", controls: shipping },
+  { heading: "billing", controls: [...billing, ...shipping] },
   { heading: "payment", controls: payment },
 ];
 
-export const initialFormData = [...contact, ...address, ...payment].reduce((formData, { id }) => {
-  formData[id] = "";
+export const initialFormData = sections.reduce((formData, { heading, controls }) => {
+  formData[heading] = controls.reduce((fields, { id, type }) => {
+    fields[id] = type === "checkbox" ? true : "";
+    return fields;
+  }, {});
   return formData;
 }, {});
+
+/*
+  initialFormData = {
+    contact: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: ""
+    },
+    shipping: {
+      city: "",
+      state: "",
+      zip: "",
+      country: ""
+    },
+    billing: {
+      checkbox: true, //type === "checkbox"
+      city: "",
+      state: "",
+      zip: "",
+      country: ""
+    },
+    payment: {
+      cardholder: "",
+      card: "",
+      expiration: "",
+      ccv: ""
+    }
+  };
+*/

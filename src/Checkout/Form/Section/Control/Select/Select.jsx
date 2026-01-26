@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "./Select.module.css";
 
-export default function Select({ id, required }) {
+export default function Select({ section, id, required }) {
   const { formData, setFormData } = useOutletContext();
 
   const options = optionsMap[id];
@@ -9,12 +9,35 @@ export default function Select({ id, required }) {
   return (
     <select
       id={id}
-      value={formData[id]}
+      value={formData[section][id]}
       required={required}
       className={styles.select}
+      disabled={section === "billing" && formData.billing.checkbox}
       onChange={(e) => {
-        const { id, value } = e.target;
-        setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+        setFormData((prevFormData) => {
+          const { value } = e.target;
+          if (section === "shipping" && prevFormData.billing.checkbox) {
+            return {
+              ...prevFormData,
+              shipping: {
+                ...prevFormData.shipping,
+                [id]: value,
+              },
+              billing: {
+                ...prevFormData.billing,
+                [id]: value,
+              },
+            };
+          }
+
+          return {
+            ...prevFormData,
+            [section]: {
+              ...prevFormData[section],
+              [id]: value,
+            },
+          };
+        });
       }}
     >
       <option value="" disabled={required}>

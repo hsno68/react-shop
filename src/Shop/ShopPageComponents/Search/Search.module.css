@@ -13,6 +13,6 @@
 }
 
 .input:focus {
-  border-color: #aaa;
+  border-color: var(--color-accent);
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
 }

@@ -5,5 +5,13 @@
 }
 
 .container label {
+  cursor: pointer;
+}
+
+.container label:not([for="checkbox"]) {
   width: 100%;
+}
+
+.container label[for="checkbox"] {
+  order: 1;
 }

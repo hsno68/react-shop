@@ -28,7 +28,8 @@
     grid-template-columns: 1fr;
   }
 
-  .heading {
+  .gridContainer .heading {
+    display: block;
     text-align: center;
   }
 }
