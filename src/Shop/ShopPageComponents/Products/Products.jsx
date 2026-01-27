@@ -192,7 +192,7 @@ export default function Products() {
           {getListOfProducts().map((productId) => {
             const product = products[productId];
 
-            const { id, title, thumbnail, price } = product;
+            const { id, title, thumbnail, price, rating } = product;
 
             return (
               <Card
@@ -200,6 +200,7 @@ export default function Products() {
                 title={title}
                 thumbnail={thumbnail}
                 price={price}
+                rating={rating}
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveProduct(product);

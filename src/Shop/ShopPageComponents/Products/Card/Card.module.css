@@ -25,6 +25,17 @@
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
+.rating {
+  font-size: 0.8rem;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.rating :global(.material-symbols-rounded) {
+  font-size: 1rem;
+}
+
 .imageWrapper {
   width: clamp(140px, 75%, 160px);
   height: clamp(140px, 75%, 160px);
