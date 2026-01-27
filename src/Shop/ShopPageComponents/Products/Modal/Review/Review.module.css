@@ -40,3 +40,10 @@
   grid-column: 3;
   font-size: 0.75rem;
 }
+
+@media (max-width: 1000px) {
+  .gridContainer {
+    display: block;
+    text-align: center;
+  }
+}
